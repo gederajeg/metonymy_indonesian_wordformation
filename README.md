@@ -1,4 +1,4 @@
-# Metonymy in Indonesian Prefixal Wordformation
+# Metonymy in Indonesian Prefixal Word Formation
 
 This repository contains the R code and .RData required to generate the Figures in the paper. It also includes a .pdf file for poster presentation via which the paper was first presented in February 2013 at the National Seminar on Mother Tongue at Universitas Udayana, Bali, Indonesia.
 
