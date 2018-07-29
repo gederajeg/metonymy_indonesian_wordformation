@@ -1,0 +1,78 @@
+In the `dframestrip` data frame, the column for `value` indicates the number of `types` indicated by the values of column `pattern`.
+For instance, for the second row with *me-*, this prefix has 14 types of metonymy pattern in the prefix's usage to derive word.
+
+`sourcetarget` data frame contains the data for the number of metonymy and word-class patterns for the prefixes
+
+`brksm` and `brkswc` contain the values to specify the `break` argument of `hist()`.
+
+`num.meto` and `num.wclass` represents the number of metonymy and word-class patterns respectively per prefix
+
+# Notes on the "edit.New_Types&Stats"
+- the TYPES column for each prefix in the `Stats` tab indicates the number of 'unique combination of metonymy patterns, word class and a prefix'
+- value in the `metonymy patterns` indicates the type frequency of the metonymy pattern for a prefix when it is used to derive a word for a given root
+- `bi-directionality` and `unidirectionality` tabs contain data for these two variables of the metonymy in word-formation
+- the 'duplicate of a prefix' note in the `directionality-sum` tab indicates duplication of prefix for a given metonymy pattenr, not necessarily removed in the database type in `meta$pref-data` tab, thus, providing unique combination of metonymy pattern, word-class pattern, and prefix.
+
+
+
+
+### Data to be shared---------------
+suppressPackageStartupMessages(library(tidyverse))
+
+# read in the classification database types
+dbase_type <- readxl::read_xlsx(path = "_Dataset_Metonymy-Prefix.xlsx", sheet = "classif.type")[,-1]
+
+dbase_type <- dbase_type %>% 
+  mutate(metonymy_pattern = paste(metonymy_source, " for ", metonymy_target, sep = ""),
+         word_class_pattern = paste(word_class_source, " to ", word_class_target, sep = ""),
+         word_class_source = replace(word_class_source, word_class_source == "qual.adj", "qualitative_adj"),
+         word_class_source = replace(word_class_source, word_class_source == "rel.adj", "relational_adj"),
+         word_class_target = replace(word_class_target, word_class_target == "qual.adj", "qualitative_adj"),
+         word_class_target = replace(word_class_target, word_class_target == "rel.adj", "relational_adj"))
+
+# bi-directional metonymy
+metonymy_directionality <- readxl::read_xlsx(path = "_Dataset_Metonymy-Prefix.xlsx", sheet = "direct.", range = "A1:C50") %>% 
+  mutate(metonymy_pattern = paste(metonymy_source, " for ", metonymy_target, sep = ""))
+  
+# load the data
+load("metoprefix.RData")
+
+# count the unique metonymy pattern in the database
+metonymy_pattern_all <- dbase_type %>% 
+  count(metonymy_pattern, sort = TRUE)
+
+# count the number of prefixes evoking a given metonymy pattern
+# this is also the data for the shared metonymy patterns by the prefixes (Primahadi Wijaya R, 2013, Table 3)
+shared.meto <- dbase_type %>% 
+  group_by(metonymy_pattern) %>% 
+  summarise(n_of_prefix = n_distinct(prefix)) %>% 
+  arrange(desc(n_of_prefix))
+  
+# count the unique wordclass pattern in the database
+wordclass_pattern_all <- dbase_type %>% 
+  count(word_class_pattern, sort = TRUE)
+
+# count the number of prefixes evoking a given wordclass pattern
+# this is also the data for the shared wordclass patterns by the prefixes (Primahadi Wijaya R, 2013, Table 4)
+shared.wclass <- dbase_type %>% 
+  group_by(word_class_pattern) %>% 
+  summarise(n_of_prefix = n_distinct(prefix)) %>% 
+  arrange(desc(n_of_prefix))
+
+rm(bubble.meto, cityrain, citysales)
+rm(par.default)
+rm(custom.xaxis)
+rm(no.wclass.patt)
+rm(no.meto.patt)
+rm(pattern)
+rm(pref.per.meto)
+rm(pref.per.wclass)
+rm(sd.meto, sd.wclass)
+rm(Target.labels, Target.perc.meto, Target.perc.wclass)
+rm(value)
+rm(bar.labels)
+rm(bar.plot)
+rm(metonymy_pattern_all)
+rm(wordclass_pattern_all)
+
+save.image(file = "gpwrajeg_2013_metoprefix.RData")
