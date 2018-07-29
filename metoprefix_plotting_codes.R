@@ -17,7 +17,7 @@ par_default <- par(no.readonly = TRUE)
 
 # Figure 1 ---------
 
-# png("specificity of prefixes-histo-tes.png",res = 400, height = 2000, width = 3600) # uncomment this line to output the plot into the current working directory
+# png("specificity of prefixes-histo-tes.png", res = 400, height = 2000, width = 3600) # uncomment this line to output the plot into the current working directory
 par(family = "serif")
 par(fig = c(0, 0.5, 0, 0.8), las = 1)
 
@@ -153,7 +153,7 @@ TargetSpec <- data.frame(Target, Metonymy, WordClass) # Data frame 'TargetSpec'
 par(par_default)
 
 # Plotting Figure 3 ------------
-# png("target_specificity.png", res = 300, height = 700, width = 950) # uncomment this line to output the plot into the current working directory
+# png("target specificity.png", res = 300, height = 700, width = 950) # uncomment this line to output the plot into the current working directory
 par(mar = c(4, 5, 3, 1), 
     omi = c(0, 0.1, 0, 0.1), 
     mgp = c(3, 0.5, 0), 
