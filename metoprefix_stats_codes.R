@@ -136,7 +136,7 @@ bidirectional <- metonymy_directionality %>%
                           "action-state",
                           "entity-state",
                           "quantity-state"))
-n_bidirectional <- 10 
+n_bidirectional <- length(unique(bidirectional$relationship))
 n_unidirectional <- dim(metonymy_directionality %>% filter(directionality == "uni-directional"))[1]
 (perc_for_unidirectional_pattern <- round((n_unidirectional/sum(n_bidirectional, n_unidirectional)) * 100, 2))
 # the percentage is presented in Primahadi Wijaya R (2013, p. 77)
