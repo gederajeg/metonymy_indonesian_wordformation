@@ -1,6 +1,6 @@
 # Metonymy in Indonesian Prefixal Word-formation
 
-[![DOI](https://zenodo.org/badge/142739450.svg)](https://zenodo.org/badge/latestdoi/142739450)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1342263.svg)](https://doi.org/10.5281/zenodo.1342263)
 
 This repository contains the R codes and .RData required to generate the figures and statistical analyses in a paper entitled *Metonymy in Indonesian Prefixal Word-formation* (Primahadi Wijaya R, 2013). The filename for the plotting script is `metoprefix_plotting_codes.R` while the filename for the quantitative analyses script is `metoprefix_stats_codes.R`.
 
